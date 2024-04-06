@@ -1,1 +1,1 @@
-# terraform_playground
+# Terraform のキャッチアップ用リポジトリ
