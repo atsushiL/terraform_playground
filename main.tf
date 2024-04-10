@@ -14,7 +14,7 @@ terraform {
 # -----------------------------------------
 # Variables
 # -----------------------------------------
-variable "project" {
+variable "projectname" {
   type = string
 }
 
