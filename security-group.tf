@@ -57,6 +57,42 @@ resource "aws_security_group" "ecs_sg" {
   }
 }
 
+resource "aws_security_group_rule" "ecs_sg_ingress_3000" {
+  type                     = "ingress"
+  from_port                = 3000
+  to_port                  = 3000
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.alb_sg.id
+  security_group_id        = aws_security_group.ecs_sg.id
+}
+
+resource "aws_security_group_rule" "ecs_sg_egress_http" {
+  type              = "egress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  security_group_id = aws_security_group.ecs_sg.id
+  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id]
+}
+
+resource "aws_security_group_rule" "ecs_sg_egress_https" {
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = aws_security_group.ecs_sg.id
+  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id]
+}
+
+resource "aws_security_group_rule" "ecs_sg_egress_3306" {
+  type                     = "egress"
+  from_port                = 3306
+  to_port                  = 3306
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.rds_sg.id
+  security_group_id        = aws_security_group.ecs_sg.id
+}
+
 # -----------------------------------------
 # Operation and Management
 # -----------------------------------------
@@ -110,7 +146,7 @@ resource "aws_security_group_rule" "opmng_sg_egress_https" {
 # -----------------------------------------
 # RDS
 # -----------------------------------------
-resource "aws_security_group" "rds_sg_ingress" {
+resource "aws_security_group" "rds_sg" {
   name        = "${var.projectname}-${var.environment}-rds-sg"
   description = "rds rule security group"
   vpc_id      = aws_vpc.vpc.id
@@ -127,5 +163,5 @@ resource "aws_security_group_rule" "rds_sg_ingress_3306" {
   to_port                  = 3306
   protocol                 = "tcp"
   source_security_group_id = aws_security_group.ecs_sg.id
-  security_group_id        = aws_security_group.rds_sg_ingress.id
+  security_group_id        = aws_security_group.rds_sg.id
 }
