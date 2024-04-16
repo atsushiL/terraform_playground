@@ -9,6 +9,11 @@ terraform {
       version = "~>3.0"
     }
   }
+  backend "s3" {
+    bucket = "aa.terraform-tfstate"
+    key    = "tfstate-dev"
+    region = "ap-northeast-1"
+  }
 }
 
 # -----------------------------------------
