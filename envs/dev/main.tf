@@ -4,4 +4,6 @@ module "vpc" {
   projectname = var.projectname
   environment = var.environment
   vpc_cidr    = var.vpc_cidr
+  subnets     = var.subnets
 }
+
