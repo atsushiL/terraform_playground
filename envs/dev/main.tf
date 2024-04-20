@@ -6,4 +6,3 @@ module "vpc" {
   vpc_cidr    = var.vpc_cidr
   subnets     = var.subnets
 }
-
