@@ -15,16 +15,6 @@ resource "aws_security_group" "alb_security_group" {
   }
 }
 
-# resource "aws_vpc_security_group_ingress_rule" "alb_security_group_ingress_https" {
-#   security_group_id = aws_security_group.alb_security_group.id
-#   from_port         = 443
-#   to_port           = 443
-#   ip_protocol       = "tcp"
-#   cidr_ipv4         = 
-
-# }
-
-
 # For ECS
 resource "aws_security_group" "ecs_security_group" {
   name        = "${var.project_name}-${var.environment}-ecs-sg"
