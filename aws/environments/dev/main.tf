@@ -1,5 +1,6 @@
 module "vpc" {
-  source                        = "../../modules/vpc/"
+  source = "../../modules/vpc/"
+
   project_name                  = var.project_name
   environment                   = var.environment
   availability_zone1            = var.availability_zone1
@@ -17,6 +18,10 @@ module "vpc" {
   rds_private_subnet2_cidr      = var.rds_private_subnet2_cidr
 }
 
+module "sg" {
+  source = "../../modules/sg"
 
-
-
+  project_name = var.project_name
+  environment  = var.environment
+  vpc_id       = module.vpc.vpc_id
+}
