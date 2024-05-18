@@ -4,7 +4,7 @@
 variable "project_name" {
   type        = string
   description = "Enter the project name."
-  default     = "demo-terraform"
+  default     = "sandbox"
 }
 
 variable "environment" {
@@ -87,3 +87,5 @@ variable "rds_private_subnet2_cidr" {
   type        = string
   default     = "10.0.144.0/24"
 }
+
+
